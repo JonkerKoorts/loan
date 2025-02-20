@@ -76,8 +76,8 @@ NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 Create a `.env` file in the project root and add the following:
 
 ```ini
-DATABASE_URL="postgresql://postgres.xitsuekgawkultdrcsti:@98emzwhG!*@aws-0-eu-central-1.pooler.supabase.com:6543/postgres"
-DIRECT_URL="postgresql://postgres.xitsuekgawkultdrcsti:@98emzwhG!*@aws-0-eu-central-1.pooler.supabase.com:5432/postgres"
+DATABASE_URL="postgresql://postgres.idtihntcualvufubijym:YOtkzmorS1fzBCKJ@aws-0-eu-central-1.pooler.supabase.com:6543/postgres"
+DIRECT_URL="postgresql://postgres.idtihntcualvufubijym:YOtkzmorS1fzBCKJ@aws-0-eu-central-1.pooler.supabase.com:5432/postgres"
 ```
 
 ---
