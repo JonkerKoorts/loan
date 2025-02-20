@@ -84,6 +84,10 @@ DIRECT_URL="postgresql://postgres.idtihntcualvufubijym:YOtkzmorS1fzBCKJ@aws-0-eu
 
 ---
 
+## PLEASE NOTE !!! WHEN SIGNING UP WITH CLERK USE ACTUAL NUMBER AND/OR EMAIL. OTP WILL BE SENT 
+
+___
+
 ## Learn More
 
 To learn more about the tools and frameworks used in this project, check out the following resources:
