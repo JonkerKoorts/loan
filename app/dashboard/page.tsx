@@ -3,9 +3,11 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import React from "react";
-import { getLoans } from "../actions/actions";
+import { create_user, getLoans } from "../actions/actions";
 import { PieChart, Pie, Label, Tooltip } from "recharts";
 import CustomLoader from "@/components/loader";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 type Loan = {
   id: string;
@@ -24,6 +26,21 @@ const DashboardPage: React.FC = () => {
   useEffect(() => {
     if (!isLoaded || !user) return;
 
+    const createUser = async () => {
+      try {
+        const the_user = {
+          clerkId: user.id,
+          email: user?.emailAddresses?.[0]?.emailAddress ?? "",
+          firstName: user?.firstName ?? "",
+          lastName: user?.lastName ?? "",
+        };
+        const response = await create_user(the_user);
+        console.log(response);
+      } catch (error) {
+        console.error("Error creating user:", error);
+      }
+    };
+
     async function fetchLoans() {
       try {
         const fetchedLoans = await getLoans(user!.id);
@@ -39,7 +56,7 @@ const DashboardPage: React.FC = () => {
         setLoading(false);
       }
     }
-
+    createUser();
     fetchLoans();
   }, [user, isLoaded]);
 
@@ -68,46 +85,58 @@ const DashboardPage: React.FC = () => {
         Visual representation of your loan amounts
       </p>
 
-      <PieChart width={450} height={450}>
-        <Pie
-          data={chartData}
-          dataKey="value"
-          nameKey="name"
-          innerRadius={100}
-          outerRadius={150}
-          fill="#8884d8"
-          paddingAngle={5}
-          strokeWidth={2}
-        >
-          <Label
-            content={({ viewBox }) => {
-              if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                return (
-                  <text
-                    x={viewBox.cx}
-                    y={viewBox.cy}
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    className="text-lg font-bold"
-                  >
-                    <tspan x={viewBox.cx} y={viewBox.cy}>
-                      {totalAmount.toLocaleString()}
-                    </tspan>
-                    <tspan
+      {loans.length > 0 ? (
+        <PieChart width={450} height={450}>
+          <Pie
+            data={chartData}
+            dataKey="value"
+            nameKey="name"
+            innerRadius={100}
+            outerRadius={150}
+            fill="#8884d8"
+            paddingAngle={5}
+            strokeWidth={2}
+          >
+            <Label
+              content={({ viewBox }) => {
+                if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                  return (
+                    <text
                       x={viewBox.cx}
-                      y={(viewBox.cy || 0) + 24}
-                      className="text-sm"
+                      y={viewBox.cy}
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                      className="text-lg font-bold"
                     >
-                      Total Loans
-                    </tspan>
-                  </text>
-                );
-              }
-            }}
-          />
-        </Pie>
-        <Tooltip />
-      </PieChart>
+                      <tspan x={viewBox.cx} y={viewBox.cy}>
+                        {totalAmount.toLocaleString()}
+                      </tspan>
+                      <tspan
+                        x={viewBox.cx}
+                        y={(viewBox.cy || 0) + 24}
+                        className="text-sm"
+                      >
+                        Total Loans
+                      </tspan>
+                    </text>
+                  );
+                }
+              }}
+            />
+          </Pie>
+          <Tooltip />
+        </PieChart>
+      ) : (
+        <div className="flex flex-col justify-center items-center mt-10">
+          <p>No loans found</p>
+          <p className="mt-5 text-xs tracking-wider text-gray-500">
+            Click here to apply for your first loan
+          </p>
+          <Button asChild variant={"outline"}>
+            <Link href={"/dashboard/apply"}>Apply</Link>
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
