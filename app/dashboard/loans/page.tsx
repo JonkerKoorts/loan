@@ -82,9 +82,7 @@ export default function LoanListPage() {
                   </span>
                 </td>
                 <td className="p-3">
-                  <Button
-                    onClick={() => router.push(`/dashboard/loans/${loan.id}`)}
-                  >
+                  <Button onClick={() => router.push(`/dashboard/loans/loan`)}>
                     View
                   </Button>
                 </td>
