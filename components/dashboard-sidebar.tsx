@@ -42,30 +42,23 @@ const DashboardSidebar: React.FC<{
   const primaryLinks = [
     {
       label: "Home",
-      href: "#",
+      href: "/dashboard",
       icon: (
         <IconBrandTabler className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
     },
     {
-      label: "Profile",
-      href: "#",
-      icon: (
-        <IconUserBolt className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
-      ),
-    },
-    {
-      label: "Billing",
-      href: "#",
-      icon: (
-        <IconSettings className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
-      ),
-    },
-    {
-      label: "Orders",
-      href: "#",
+      label: "Apply for Loan",
+      href: "/dashboard/apply",
       icon: (
         <IconArrowLeft className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
+      ),
+    },
+    {
+      label: "Loans",
+      href: "/dashboard/loans",
+      icon: (
+        <IconChecklist className="h-5 w-5 flex-shrink-0 text-neutral-700 dark:text-neutral-200" />
       ),
     },
   ];
@@ -157,9 +150,9 @@ export const Logo = () => {
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="whitespace-pre font-medium text-black dark:text-white"
+        className="whitespace-pre font-bold text-black text-lg dark:text-white"
       >
-        Acet Labs
+        Sovereign Loan Accord
       </motion.span>
     </Link>
   );
