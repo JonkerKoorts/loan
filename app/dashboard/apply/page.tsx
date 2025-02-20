@@ -5,6 +5,7 @@ import { applyForLoan } from "@/app/actions/actions";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
+import CustomLoader from "@/components/loader";
 
 export default function ApplyLoanPage() {
   const { user, isLoaded } = useUser();
@@ -13,7 +14,12 @@ export default function ApplyLoanPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  if (!isLoaded || !user) return <div>Loading...</div>;
+  if (!isLoaded || !user)
+    return (
+      <div className="flex justify-center items-start h-full w-full">
+        <CustomLoader />
+      </div>
+    );
 
   const handleApply = async () => {
     if (!title.trim()) return;

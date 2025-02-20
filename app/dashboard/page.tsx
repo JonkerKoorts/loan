@@ -5,6 +5,7 @@ import { useUser } from "@clerk/nextjs";
 import React from "react";
 import { getLoans } from "../actions/actions";
 import { PieChart, Pie, Label, Tooltip } from "recharts";
+import CustomLoader from "@/components/loader";
 
 type Loan = {
   id: string;
@@ -43,7 +44,11 @@ const DashboardPage: React.FC = () => {
   }, [user, isLoaded]);
 
   if (!isLoaded || loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-start h-full w-full">
+        <CustomLoader />
+      </div>
+    );
   }
 
   // Convert loan data for PieChart

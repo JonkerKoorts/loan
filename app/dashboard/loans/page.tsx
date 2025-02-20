@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { getLoans } from "@/app/actions/actions";
 import { useUser } from "@clerk/nextjs";
+import CustomLoader from "@/components/loader";
 
 type Loan = {
   id: string;
@@ -43,7 +44,12 @@ export default function LoanListPage() {
     }
   }, []);
 
-  if (loading) return <div>Loading loans...</div>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-start h-full w-full">
+        <CustomLoader />
+      </div>
+    );
 
   return (
     <div className="container mx-auto p-4">
