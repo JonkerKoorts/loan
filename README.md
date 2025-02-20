@@ -34,7 +34,7 @@ Ensure you have the following installed:
 
 2. Install dependencies:
    ```sh
-   bun install
+   bun install --legacy-peer-deps
    ```
 
 3. Start the development server:
