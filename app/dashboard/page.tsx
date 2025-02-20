@@ -8,8 +8,7 @@ const DashboardPage: React.FC = () => {
   const { user, isLoaded } = useUser();
 
   useEffect(() => {
-    if (!isLoaded || !user) return; // Ensure user is loaded before running
-
+    if (!isLoaded || !user) return;
     const createUser = async () => {
       try {
         const the_user = {
