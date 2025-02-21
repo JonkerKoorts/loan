@@ -96,7 +96,6 @@ export function LoanCTAWithImages() {
 export const FeaturedImages = ({
   textClassName,
   className,
-  showStars = false,
   containerClassName,
 }: {
   textClassName?: string;
@@ -113,8 +112,9 @@ export const FeaturedImages = ({
     springConfig
   );
 
-  const handleMouseMove = (event: any) => {
-    const halfWidth = event.target.offsetWidth / 2;
+  const handleMouseMove = (event: React.MouseEvent<HTMLImageElement>) => {
+    const target = event.currentTarget; // More type-safe than event.target
+    const halfWidth = target.offsetWidth / 2;
     x.set(event.nativeEvent.offsetX - halfWidth);
   };
 

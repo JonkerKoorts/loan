@@ -12,12 +12,7 @@ import {
   IconX,
 } from "@tabler/icons-react";
 
-import {
-  IconArrowLeft,
-  IconBrandTabler,
-  IconSettings,
-  IconUserBolt,
-} from "@tabler/icons-react";
+import { IconArrowLeft, IconBrandTabler } from "@tabler/icons-react";
 import { IconChecklist } from "@tabler/icons-react";
 import { UserButton } from "@clerk/nextjs";
 import { useUser } from "@clerk/clerk-react";

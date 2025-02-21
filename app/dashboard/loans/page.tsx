@@ -27,7 +27,12 @@ export default function LoanListPage() {
     else {
       async function fetchLoans() {
         try {
-          const fetchedLoans = await getLoans(user!.id);
+          const fetchedLoans = await getLoans({
+            clerkId: user!.id,
+            email: "",
+            firstName: "",
+            lastName: "",
+          });
           setLoans(
             fetchedLoans.map((loan) => ({
               ...loan,

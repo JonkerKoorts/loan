@@ -2,9 +2,16 @@
 
 import { prisma } from "@/lib/db";
 
+interface User {
+  clerkId: string;
+  email: string | "";
+  firstName: string | "";
+  lastName: string | "";
+}
+
 
 // Create user in DB
-export async function create_user(the_user: any) {
+export async function create_user(the_user: User) {
   try {
     // Check if user already exists
     const existingUser = await prisma.user.findUnique({
@@ -28,7 +35,7 @@ export async function create_user(the_user: any) {
   }
 }
 
-export async function getLoans(user_id: any) {
+export async function getLoans(user_id: User) {
   
     if (!user_id) {
       throw new Error("Unauthorized");
@@ -36,7 +43,7 @@ export async function getLoans(user_id: any) {
   
     try {
       const loans = await prisma.loan.findMany({
-        where: { user: { clerkId: user_id } },
+        where: { user: { clerkId: user_id.clerkId } },
         orderBy: { createdAt: "desc" },
       });
   
