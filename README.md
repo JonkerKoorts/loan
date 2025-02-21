@@ -34,7 +34,7 @@ Ensure you have the following installed:
 
 2. Install dependencies:
    ```sh
-   bun install
+   bun install --legacy-peer-deps
    ```
 
 3. Start the development server:
@@ -83,6 +83,10 @@ DIRECT_URL="postgresql://postgres.idtihntcualvufubijym:YOtkzmorS1fzBCKJ@aws-0-eu
 ```
 
 ---
+
+## PLEASE NOTE !!! WHEN SIGNING UP WITH CLERK USE ACTUAL NUMBER AND/OR EMAIL. OTP WILL BE SENT 
+
+___
 
 ## Learn More
 
