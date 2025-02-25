@@ -61,7 +61,7 @@ export function LoanHeroSection() {
           <div className="flex sm:flex-row flex-col gap-4 items-center mt-10">
             <button
               onClick={handleSignUp}
-              className="px-4 py-2 rounded-lg bg-sky-500 text-white w-full sm:w-auto font-bold text-base hover:bg-sky-600 transition duration-200"
+              className="px-4 py-2 rounded-lg bg-sky-500 text-white font-bold text-base hover:bg-sky-600 transition duration-200"
             >
               Get Started
             </button>

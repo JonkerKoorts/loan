@@ -1,6 +1,7 @@
 "use client";
 
 import { LoanCTAWithImages } from "@/components/cta";
+import { SimpleFooterWithFourGrids } from "@/components/footer";
 import { LoanHeroSection } from "@/components/hero";
 import { Button } from "@/components/ui/button";
 import { SignInButton, useUser } from "@clerk/nextjs";
@@ -25,6 +26,7 @@ export default function Home() {
       </div>
       <LoanHeroSection />
       <LoanCTAWithImages />
+      <SimpleFooterWithFourGrids />
     </div>
   );
 }
