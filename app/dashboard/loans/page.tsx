@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { getLoans } from "@/app/actions/actions";
 import { useUser } from "@clerk/nextjs";
 import CustomLoader from "@/components/loader";
+import Link from "next/link";
 
 type Loan = {
   id: string;
@@ -61,7 +62,12 @@ export default function LoanListPage() {
       <h1 className="text-2xl font-bold mb-4">Your Loans</h1>
 
       {loans.length === 0 ? (
-        <p>No loans found.</p>
+        <div className="flex flex-col gap-3 justify-center items-center">
+          <p>No loans found.</p>
+          <Button asChild variant={"outline"}>
+            <Link href={"/dashboard/apply"}>Apply for Loan</Link>
+          </Button>
+        </div>
       ) : (
         <table className="min-w-full bg-white shadow-md rounded-lg">
           <thead>

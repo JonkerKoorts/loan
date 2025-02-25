@@ -91,46 +91,51 @@ const DashboardPage: React.FC = () => {
       </p>
 
       {loans.length > 0 ? (
-        <PieChart width={450} height={450}>
-          <Pie
-            data={chartData}
-            dataKey="value"
-            nameKey="name"
-            innerRadius={100}
-            outerRadius={150}
-            fill="#8884d8"
-            paddingAngle={5}
-            strokeWidth={2}
-          >
-            <Label
-              content={({ viewBox }) => {
-                if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                  return (
-                    <text
-                      x={viewBox.cx}
-                      y={viewBox.cy}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      className="text-lg font-bold"
-                    >
-                      <tspan x={viewBox.cx} y={viewBox.cy}>
-                        {totalAmount.toLocaleString()}
-                      </tspan>
-                      <tspan
+        <>
+          <PieChart width={450} height={450}>
+            <Pie
+              data={chartData}
+              dataKey="value"
+              nameKey="name"
+              innerRadius={100}
+              outerRadius={150}
+              fill="#8884d8"
+              paddingAngle={5}
+              strokeWidth={2}
+            >
+              <Label
+                content={({ viewBox }) => {
+                  if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                    return (
+                      <text
                         x={viewBox.cx}
-                        y={(viewBox.cy || 0) + 24}
-                        className="text-sm"
+                        y={viewBox.cy}
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                        className="text-lg font-bold"
                       >
-                        Total Loans
-                      </tspan>
-                    </text>
-                  );
-                }
-              }}
-            />
-          </Pie>
-          <Tooltip />
-        </PieChart>
+                        <tspan x={viewBox.cx} y={viewBox.cy}>
+                          {totalAmount.toLocaleString()}
+                        </tspan>
+                        <tspan
+                          x={viewBox.cx}
+                          y={(viewBox.cy || 0) + 24}
+                          className="text-sm"
+                        >
+                          Total Loans
+                        </tspan>
+                      </text>
+                    );
+                  }
+                }}
+              />
+            </Pie>
+            <Tooltip />
+          </PieChart>
+          <Button asChild variant={"outline"}>
+            <Link href={"/dashboard/loans"}>View Loans</Link>
+          </Button>
+        </>
       ) : (
         <div className="flex flex-col justify-center items-center mt-10">
           <p>No loans found</p>
