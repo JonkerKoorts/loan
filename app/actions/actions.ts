@@ -71,15 +71,21 @@ export async function applyForLoan(clerkId: string, title: string, amount: numbe
       throw new Error("User not found");
     }
 
-    // Fixed interest rate for now
-    const interestRate = 5.0;
+    const status = () => {
+      // Randomly choose between approved and rejected and pending
+      const statuses = ["approved", "rejected", "pending"];
+      return statuses[Math.floor(Math.random() * statuses.length)];
+    }
+
+    // make the interest rate random between 5% - 21%
+    const interestRate = Math.floor(Math.random() * 16) + 5;
 
     const newLoan = await prisma.loan.create({
       data: {
         title,
         amount,
         interestRate,
-        status: "approved", // Always approved
+        status: status(), // Always approved
         userId: user.id,
       },
     });

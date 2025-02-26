@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { getLoans } from "@/app/actions/actions";
 import { useUser } from "@clerk/nextjs";
 import CustomLoader from "@/components/loader";
 import Link from "next/link";
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic";
 import searching from "../../../public/animations/searching.json";
 import {
   Table,
@@ -28,7 +28,12 @@ type Loan = {
   createdAt: string;
 };
 
-export default function LoanListPage() {
+const Lottie = dynamic(() => import("lottie-react"), {
+  ssr: false,
+  loading: () => <div style={{ width: 200, height: 200 }}></div>,
+});
+
+const LoanListPage: React.FC = () => {
   const [loans, setLoans] = useState<Loan[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -59,7 +64,7 @@ export default function LoanListPage() {
       }
       fetchLoans();
     }
-  }, []);
+  }, [isLoaded, user]);
 
   if (loading)
     return (
@@ -131,4 +136,6 @@ export default function LoanListPage() {
       )}
     </div>
   );
-}
+};
+
+export default LoanListPage;

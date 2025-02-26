@@ -42,8 +42,8 @@ export default function ApplyLoanPage() {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Apply for a Loan</h1>
       <p className="text-gray-500">
-        Just enter an amount and name to get started. We'll take care of the
-        rest
+        Just enter an amount and name to get started. We&apos;ll take care of
+        the rest
       </p>
 
       <div className="mb-4">
