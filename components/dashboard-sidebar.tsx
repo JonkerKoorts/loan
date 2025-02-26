@@ -124,7 +124,7 @@ const DashboardSidebar: React.FC<{
               link={{
                 label: `${user?.fullName}`,
                 href: "#",
-                icon: <UserButton />,
+                icon: <UserButton afterSignOutUrl="/" />,
               }}
             />
           </div>
