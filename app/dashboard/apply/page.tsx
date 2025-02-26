@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import CustomLoader from "@/components/loader";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 export default function ApplyLoanPage() {
   const { user, isLoaded } = useUser();
@@ -39,12 +41,16 @@ export default function ApplyLoanPage() {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Apply for a Loan</h1>
+      <p className="text-gray-500">
+        Just enter an amount and name to get started. We'll take care of the
+        rest
+      </p>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">
+        <Label className="block text-sm font-medium text-gray-700">
           Loan Title
-        </label>
-        <input
+        </Label>
+        <Input
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -54,10 +60,10 @@ export default function ApplyLoanPage() {
       </div>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">
+        <Label className="block text-sm font-medium text-gray-700">
           Loan Amount
-        </label>
-        <input
+        </Label>
+        <Input
           type="number"
           value={amount}
           onChange={(e) => setAmount(parseFloat(e.target.value))}

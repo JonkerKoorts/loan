@@ -71,10 +71,7 @@ export default function LoanListPage() {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Your Loans</h1>
-      <p className="text-gray-500">
-        Just enter an amount and name to get started. We'll take care of the
-        rest
-      </p>
+      <p className="text-gray-500">Looking clean</p>
 
       {loans.length === 0 ? (
         <div className="flex flex-col justify-center items-center mt-10">
@@ -98,7 +95,7 @@ export default function LoanListPage() {
               <TableHead className="w-[100px]">Title</TableHead>
               <TableHead>Amount</TableHead>
               <TableHead>Interest Rate</TableHead>
-              <TableHead className="text-right">Status</TableHead>
+              <TableHead>Status</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -108,7 +105,7 @@ export default function LoanListPage() {
                 <TableCell className="font-medium">{loan.title}</TableCell>
                 <TableCell>R{loan.amount.toFixed(2)}</TableCell>
                 <TableCell>{loan.interestRate}%</TableCell>
-                <TableCell className="text-right">
+                <TableCell>
                   {" "}
                   <span
                     className={`px-2 py-1 rounded ${
