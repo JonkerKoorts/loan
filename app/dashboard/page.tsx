@@ -8,6 +8,8 @@ import { PieChart, Pie, Label, Tooltip } from "recharts";
 import CustomLoader from "@/components/loader";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Lottie from "lottie-react";
+import searching from "../../public/animations/searching.json";
 
 type Loan = {
   id: string;
@@ -84,14 +86,14 @@ const DashboardPage: React.FC = () => {
   const totalAmount = chartData.reduce((acc, curr) => acc + curr.value, 0);
 
   return (
-    <div className="flex flex-col items-center w-full h-full">
-      <h2 className="text-xl font-bold">Loan Distribution</h2>
+    <div className="container mx-auto p-4">
+      <h2 className="text-2xl font-bold mb-4">Loan Distribution</h2>
       <p className="text-gray-500">
         Visual representation of your loan amounts
       </p>
 
       {loans.length > 0 ? (
-        <>
+        <div className="w-full flex flex-col items-center justify-center">
           <PieChart width={450} height={450}>
             <Pie
               data={chartData}
@@ -135,11 +137,15 @@ const DashboardPage: React.FC = () => {
           <Button asChild variant={"outline"}>
             <Link href={"/dashboard/loans"}>View Loans</Link>
           </Button>
-        </>
+        </div>
       ) : (
         <div className="flex flex-col justify-center items-center mt-10">
+          <Lottie
+            animationData={searching}
+            style={{ width: 200, height: 200 }}
+          />
           <p>No loans found</p>
-          <p className="mt-5 text-xs tracking-wider text-gray-500">
+          <p className="my-5 text-xs tracking-wider text-gray-500">
             Click here to apply for your first loan
           </p>
           <Button asChild variant={"outline"}>

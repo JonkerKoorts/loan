@@ -7,6 +7,17 @@ import { getLoans } from "@/app/actions/actions";
 import { useUser } from "@clerk/nextjs";
 import CustomLoader from "@/components/loader";
 import Link from "next/link";
+import Lottie from "lottie-react";
+import searching from "../../../public/animations/searching.json";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 type Loan = {
   id: string;
@@ -60,32 +71,45 @@ export default function LoanListPage() {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Your Loans</h1>
+      <p className="text-gray-500">
+        Just enter an amount and name to get started. We'll take care of the
+        rest
+      </p>
 
       {loans.length === 0 ? (
-        <div className="flex flex-col gap-3 justify-center items-center">
-          <p>No loans found.</p>
+        <div className="flex flex-col justify-center items-center mt-10">
+          <Lottie
+            animationData={searching}
+            style={{ width: 200, height: 200 }}
+          />
+          <p>No loans found</p>
+          <p className="my-5 text-xs tracking-wider text-gray-500">
+            Click here to apply for your first loan
+          </p>
           <Button asChild variant={"outline"}>
-            <Link href={"/dashboard/apply"}>Apply for Loan</Link>
+            <Link href={"/dashboard/apply"}>Apply</Link>
           </Button>
         </div>
       ) : (
-        <table className="min-w-full bg-white shadow-md rounded-lg">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="p-3 text-left">Title</th>
-              <th className="p-3 text-left">Amount</th>
-              <th className="p-3 text-left">Interest Rate</th>
-              <th className="p-3 text-left">Status</th>
-              <th className="p-3 text-left">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table>
+          <TableCaption>A list of your recent loan activity.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[100px]">Title</TableHead>
+              <TableHead>Amount</TableHead>
+              <TableHead>Interest Rate</TableHead>
+              <TableHead className="text-right">Status</TableHead>
+              <TableHead className="text-right">Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {loans.map((loan) => (
-              <tr key={loan.id} className="border-b">
-                <td className="p-3">{loan.title}</td>
-                <td className="p-3">R{loan.amount.toFixed(2)}</td>
-                <td className="p-3">{loan.interestRate}%</td>
-                <td className="p-3">
+              <TableRow key={loan.id}>
+                <TableCell className="font-medium">{loan.title}</TableCell>
+                <TableCell>R{loan.amount.toFixed(2)}</TableCell>
+                <TableCell>{loan.interestRate}%</TableCell>
+                <TableCell className="text-right">
+                  {" "}
                   <span
                     className={`px-2 py-1 rounded ${
                       loan.status === "approved"
@@ -97,16 +121,16 @@ export default function LoanListPage() {
                   >
                     {loan.status}
                   </span>
-                </td>
-                <td className="p-3">
+                </TableCell>
+                <TableCell className="text-right">
                   <Button onClick={() => router.push(`/dashboard/loans/loan`)}>
                     View
                   </Button>
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       )}
     </div>
   );
