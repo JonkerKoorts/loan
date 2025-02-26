@@ -14,8 +14,8 @@ import {
 
 import { IconArrowLeft, IconBrandTabler } from "@tabler/icons-react";
 import { IconChecklist } from "@tabler/icons-react";
-import { UserButton } from "@clerk/nextjs";
-import { useUser } from "@clerk/clerk-react";
+import { SignOutButton, UserButton } from "@clerk/nextjs";
+import { Button } from "./ui/button";
 
 interface Links {
   label: string;
@@ -33,7 +33,6 @@ const DashboardSidebar: React.FC<{
   className?: string;
   children: React.ReactNode;
 }) => {
-  const { user } = useUser();
   const primaryLinks = [
     {
       label: "Home",
@@ -119,12 +118,43 @@ const DashboardSidebar: React.FC<{
               ))}
             </div>
           </div>
+          <div className="mt-4">
+            <div className="h-px w-full bg-neutral-200 dark:bg-neutral-700"></div>
+            <div className="h-px w-full bg-white dark:bg-neutral-900"></div>
+          </div>
           <div>
             <SidebarLink
+              className="m-0 p-0 py-0"
               link={{
-                label: `${user?.fullName}`,
+                label: ``,
                 href: "#",
-                icon: <UserButton afterSignOutUrl="/" />,
+                icon: (
+                  <Button
+                    asChild
+                    variant={"outline"}
+                    className="w-full mx-auto"
+                  >
+                    <span className="w-full">
+                      <UserButton showName />
+                    </span>
+                  </Button>
+                ),
+              }}
+            />
+            <SidebarLink
+              className="m-0 p-0 py-0"
+              link={{
+                label: ``,
+                href: "#",
+                icon: (
+                  <Button
+                    asChild
+                    variant={"destructive"}
+                    className="w-full mx-auto"
+                  >
+                    <SignOutButton />
+                  </Button>
+                ),
               }}
             />
           </div>
