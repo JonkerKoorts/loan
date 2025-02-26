@@ -7,8 +7,6 @@ import { getLoans } from "@/app/actions/actions";
 import { useUser } from "@clerk/nextjs";
 import CustomLoader from "@/components/loader";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import searching from "../../../public/animations/searching.json";
 import {
   Table,
   TableBody,
@@ -18,6 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import LottieAnimation from "@/components/animation";
 
 type Loan = {
   id: string;
@@ -27,11 +26,6 @@ type Loan = {
   status: string;
   createdAt: string;
 };
-
-const Lottie = dynamic(() => import("lottie-react"), {
-  ssr: false,
-  loading: () => <div style={{ width: 200, height: 200 }}></div>,
-});
 
 const LoanListPage: React.FC = () => {
   const [loans, setLoans] = useState<Loan[]>([]);
@@ -80,10 +74,7 @@ const LoanListPage: React.FC = () => {
 
       {loans.length === 0 ? (
         <div className="flex flex-col justify-center items-center mt-10">
-          <Lottie
-            animationData={searching}
-            style={{ width: 200, height: 200 }}
-          />
+          <LottieAnimation />
           <p>No loans found</p>
           <p className="my-5 text-xs tracking-wider text-gray-500">
             Click here to apply for your first loan

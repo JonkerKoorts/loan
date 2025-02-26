@@ -13,8 +13,7 @@ import {
   ChartContainer,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import searching from "../../public/animations/searching.json";
-import dynamic from "next/dynamic";
+import LottieAnimation from "@/components/animation";
 
 type Loan = {
   id: string;
@@ -24,12 +23,6 @@ type Loan = {
   status: string;
   createdAt: string;
 };
-
-// Dynamically import Lottie with SSR disabled
-const Lottie = dynamic(() => import("lottie-react"), {
-  ssr: false,
-  loading: () => <div style={{ width: 200, height: 200 }}></div>,
-});
 
 const DashboardPage: React.FC = () => {
   const { user, isLoaded } = useUser();
@@ -89,15 +82,21 @@ const DashboardPage: React.FC = () => {
 
   if (loans.length === 0) {
     return (
-      <div className="flex flex-col justify-center items-center mt-10">
-        <Lottie animationData={searching} style={{ width: 200, height: 200 }} />
-        <p>No loans found</p>
-        <p className="my-5 text-xs tracking-wider text-gray-500">
-          Click here to apply for your first loan
+      <div className="container mx-auto p-4">
+        <h2 className="text-2xl font-bold mb-4">Loan Distribution</h2>
+        <p className="text-gray-500">
+          Hark ... Thou hast no loans to show. Apply for one now!
         </p>
-        <Button asChild variant={"outline"}>
-          <Link href={"/dashboard/apply"}>Apply</Link>
-        </Button>
+        <div className="flex flex-col justify-center items-center mt-10">
+          <LottieAnimation />
+          <p>No loans found</p>
+          <p className="my-5 text-xs tracking-wider text-gray-500">
+            Click here to apply for your first loan
+          </p>
+          <Button asChild variant={"outline"}>
+            <Link href={"/dashboard/apply"}>Apply</Link>
+          </Button>
+        </div>
       </div>
     );
   }
